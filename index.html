@@ -83,6 +83,14 @@
     <input id="buscar" type="search" placeholder="Buscar una película...">
 
     <h2>Películas destacadas</h2>
+
+<div class="categorias">
+  <button onclick="filtrarCategoria('Acción y aventura')">Acción y aventura</button>
+  <button onclick="filtrarCategoria('Animación')">Animación</button>
+  <button onclick="filtrarCategoria('Ciencia ficción')">Ciencia ficción</button>
+  <button onclick="filtrarCategoria('Todas')">Todas las películas</button>
+</div>
+
     <section class="peliculas" id="lista">
       <article class="pelicula">
         <div class="poster">🎬</div>
@@ -138,6 +146,30 @@ src="https://image.tmdb.org/t/p/original/3aDWCRXLYOCuxjrjiPfLd79tcI6.jpg"
       });
     });
   </script>
+
+<script>
+function filtrarCategoria(categoria) {
+  const peliculas = document.querySelectorAll('#lista > *');
+
+  peliculas.forEach(function(pelicula) {
+    if (categoria === 'Todas') {
+      pelicula.style.display = '';
+    } else {
+      const texto = pelicula.innerText.toLowerCase();
+
+      const coincide =
+        categoria === 'Acción y aventura' &&
+        /acción|aventura|mad max|sonic/.test(texto) ||
+        categoria === 'Animación' &&
+        /animación|sonic|dibujos/.test(texto) ||
+        categoria === 'Ciencia ficción' &&
+        /ciencia ficción|estrellas|espacio/.test(texto);
+
+      pelicula.style.display = coincide ? '' : 'none';
+    }
+  });
+}
+</script>
 </body>
 </html>
 
